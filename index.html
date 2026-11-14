@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flappy Unicorn - Candy Kingdom</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SCREEN 1: MAIN MENU PAGE -->
+  <div id="main-screen" class="screen">
+    <div class="menu-card">
+      <div class="unicorn-icon">🦄</div>
+      <h1>Flappy Unicorn</h1>
+      <p>Fly past the giant candy canes in the Candy Kingdom!</p>
+      <button id="start-btn">Click Here</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: GAMEPLAY PAGE -->
+  <div id="game-screen" class="screen hidden">
+    <div class="game-wrapper">
+      <div id="score-board">Score: <span id="score">0</span></div>
+      <canvas id="gameCanvas" width="420" height="600"></canvas>
+      
+      <!-- Game Over Popup -->
+      <div id="game-over" class="hidden">
+        <h2>Sugar Crash!</h2>
+        <p>Final Score: <span id="final-score">0</span></p>
+        <button id="restart-btn">Play Again</button>
+      </div>
+    </div>
+    <p class="controls-hint">Press <strong>SPACE</strong> or <strong>CLICK</strong> to boost with rainbow magic!</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

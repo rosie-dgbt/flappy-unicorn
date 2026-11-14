@@ -91,71 +91,100 @@ const unicorn = {
     const tilt = Math.min(Math.max(this.velocity * 0.045, -0.4), 0.45);
     ctx.rotate(tilt);
 
-    // Back Legs
-    ctx.fillStyle = "#ff758f";
+    // Flowing Rainbow Tail
+    ctx.strokeStyle = "#c77dff";
+    ctx.lineWidth = 4;
+    ctx.lineCap = "round";
     ctx.beginPath();
-    ctx.roundRect(-14, 10, 6, 12, 3);
-    ctx.roundRect(6, 10, 6, 12, 3);
-    ctx.fill();
+    ctx.moveTo(-18, 0);
+    ctx.quadraticCurveTo(-28, -2, -31, 8);
+    ctx.stroke();
 
-    // 3D Shaded Pink Unicorn Body
-    const bodyGrad = ctx.createRadialGradient(-4, -2, 3, 0, 4, 24);
-    bodyGrad.addColorStop(0, "#ffc2d1");
-    bodyGrad.addColorStop(0.6, "#ff8fa3");
+    // 4 Galloping Horse Legs & Hooves
+    ctx.strokeStyle = "#e05780";
+    ctx.lineWidth = 3.5;
+    ctx.beginPath();
+    // Back legs
+    ctx.moveTo(-13, 7); ctx.lineTo(-18, 14); ctx.lineTo(-23, 18);
+    ctx.moveTo(-9, 8);  ctx.lineTo(-12, 16); ctx.lineTo(-15, 21);
+    // Front legs
+    ctx.moveTo(8, 7);   ctx.lineTo(14, 13);  ctx.lineTo(19, 17);
+    ctx.moveTo(11, 6);  ctx.lineTo(18, 10);  ctx.lineTo(22, 14);
+    ctx.stroke();
+
+    // Golden Hooves
+    ctx.fillStyle = "#ffb703";
+    [[-23, 18], [-15, 21], [19, 17], [22, 14]].forEach(([hx, hy]) => {
+      ctx.beginPath();
+      ctx.arc(hx, hy, 2.2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    // 3D Shaded Horse Silhouette (Torso + Neck + Head + Muzzle)
+    const bodyGrad = ctx.createLinearGradient(-15, -20, 20, 12);
+    bodyGrad.addColorStop(0, "#ffd6e0");
+    bodyGrad.addColorStop(0.5, "#ff8fa3");
     bodyGrad.addColorStop(1, "#e05780");
 
     ctx.fillStyle = bodyGrad;
     ctx.beginPath();
-    ctx.ellipse(-2, 4, 21, 13, 0, 0, Math.PI * 2);
+    ctx.moveTo(-18, 0);                        // Rump
+    ctx.quadraticCurveTo(-6, -3, 4, -3);       // Back / Saddle
+    ctx.lineTo(11, -18);                       // Back of neck
+    ctx.lineTo(17, -20);                       // Forehead
+    ctx.lineTo(28, -13);                       // Nose bridge / Muzzle tip
+    ctx.quadraticCurveTo(27, -8, 22, -8);      // Chin / Jaw
+    ctx.lineTo(15, -7);                        // Throat
+    ctx.quadraticCurveTo(15, 6, 8, 9);         // Chest
+    ctx.quadraticCurveTo(-5, 11, -16, 8);      // Belly
+    ctx.quadraticCurveTo(-20, 4, -18, 0);      // Hindquarter
+    ctx.closePath();
     ctx.fill();
     ctx.strokeStyle = "#c9184a";
     ctx.lineWidth = 1.5;
     ctx.stroke();
 
-    // Neck & Head
-    const headGrad = ctx.createRadialGradient(10, -14, 2, 13, -10, 14);
-    headGrad.addColorStop(0, "#ffd6e0");
-    headGrad.addColorStop(0.7, "#ff8fa3");
-    headGrad.addColorStop(1, "#e05780");
-
-    ctx.fillStyle = headGrad;
+    // Pointed Horse Ear
+    ctx.fillStyle = "#ff8fa3";
     ctx.beginPath();
-    ctx.ellipse(13, -9, 11, 9, -0.2, 0, Math.PI * 2);
+    ctx.moveTo(11, -18);
+    ctx.lineTo(12, -26);
+    ctx.lineTo(15, -19);
+    ctx.closePath();
     ctx.fill();
     ctx.stroke();
 
-    // Snout
-    ctx.fillStyle = "#ffb3c1";
-    ctx.beginPath();
-    ctx.ellipse(22, -7, 6, 5, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Golden Spiral Horn
-    const hornGrad = ctx.createLinearGradient(14, -18, 24, -32);
+    // Golden Spiral Horn (Positioned on Forehead)
+    const hornGrad = ctx.createLinearGradient(16, -19, 28, -32);
     hornGrad.addColorStop(0, "#ffb703");
     hornGrad.addColorStop(0.5, "#ffe66d");
     hornGrad.addColorStop(1, "#fb8500");
     ctx.fillStyle = hornGrad;
     ctx.beginPath();
-    ctx.moveTo(14, -17);
-    ctx.lineTo(25, -31);
-    ctx.lineTo(20, -14);
+    ctx.moveTo(16, -19);
+    ctx.lineTo(29, -31);
+    ctx.lineTo(20, -16);
     ctx.closePath();
     ctx.fill();
     ctx.strokeStyle = "#d97706";
     ctx.lineWidth = 1;
     ctx.stroke();
 
-    // Pastel Purple & Cyan Mane
-    ctx.fillStyle = "#c77dff";
+    // Flowing Strands Mane along Neck
+    ctx.lineCap = "round";
+    ctx.strokeStyle = "#c77dff";
+    ctx.lineWidth = 3.5;
     ctx.beginPath();
-    ctx.arc(6, -15, 6, 0, Math.PI * 2);
-    ctx.arc(2, -9, 6, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = "#48cae4";
+    ctx.moveTo(11, -18);
+    ctx.quadraticCurveTo(4, -13, 2, -4);
+    ctx.stroke();
+
+    ctx.strokeStyle = "#48cae4";
+    ctx.lineWidth = 3;
     ctx.beginPath();
-    ctx.arc(0, -3, 5.5, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.moveTo(9, -14);
+    ctx.quadraticCurveTo(2, -9, 0, -2);
+    ctx.stroke();
 
     // Flapping White Angel Wing
     const wingY = Math.sin(frames * 0.35) * 4;
@@ -166,16 +195,21 @@ const unicorn = {
     ctx.strokeStyle = "#ffc2d1";
     ctx.stroke();
 
-    // Cute Eye & Sparkle
+    // Horse Eye, Sparkle & Nostril
     ctx.fillStyle = "#2b0918";
     ctx.beginPath();
-    ctx.arc(15, -10, 2.5, 0, Math.PI * 2);
+    ctx.arc(18, -15, 2.2, 0, Math.PI * 2);
     ctx.fill();
     ctx.fillStyle = "#ffffff";
     ctx.beginPath();
-    ctx.arc(16, -11, 1, 0, Math.PI * 2);
+    ctx.arc(18.7, -15.7, 0.9, 0, Math.PI * 2);
     ctx.fill();
 
+    // Nostril on Muzzle
+    ctx.fillStyle = "#a4133c";
+    ctx.beginPath();
+    ctx.arc(25.5, -12, 1.1, 0, Math.PI * 2);
+    ctx.fill();
     ctx.restore();
   },
 
